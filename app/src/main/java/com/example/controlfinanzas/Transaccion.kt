@@ -95,25 +95,23 @@ class Transaccion : AppCompatActivity() {
         val categoria = spCategoria.selectedItem.toString()
         val fecha = etFecha.text.toString()
 
-        if (monto == null || monto <= 0) {
-            Toast.makeText(this, "Por favor ingrese un monto válido", Toast.LENGTH_SHORT).show()
+        if (monto == null || monto <= 0 || descripcion.isEmpty() || fecha.isEmpty()) {
+            Toast.makeText(this, "Complete todos los campos correctamente", Toast.LENGTH_SHORT).show()
             return
         }
 
-        if (descripcion.isEmpty() || fecha.isEmpty()) {
-            Toast.makeText(this, "Complete todos los campos", Toast.LENGTH_SHORT).show()
-            return
-        }
+        val dbHelper = DatabaseHelper(this)
+        val tipo = if (tipoTransaccion == "entrada") "entrada" else "gasto"
+        val result = dbHelper.insertarTransaccion(tipo, monto, categoria, descripcion, fecha)
 
-        val tipoTransaccionTexto = if (tipoTransaccion == "entrada") {
-            "Entrada"
+        if (result != -1L) {
+            Toast.makeText(this, "Transacción guardada exitosamente", Toast.LENGTH_SHORT).show()
+            limpiarCampos()
         } else {
-            "Gasto"
+            Toast.makeText(this, "Error al guardar la transacción", Toast.LENGTH_SHORT).show()
         }
-
-        Toast.makeText(this, "$tipoTransaccionTexto guardado exitosamente", Toast.LENGTH_SHORT).show()
-        limpiarCampos()
     }
+
 
     private fun limpiarCampos() {
         etMonto.text.clear()

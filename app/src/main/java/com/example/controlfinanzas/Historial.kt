@@ -16,9 +16,7 @@ class Historial : AppCompatActivity() {
 
     private val calendar = Calendar.getInstance()
     private val dateFormat = SimpleDateFormat("MMMM yyyy", Locale.getDefault())
-
-    // Lista de transacciones
-    private val transacciones = mutableListOf<Transaccion>()
+    private val transacciones = mutableListOf<TransaccionModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,19 +28,15 @@ class Historial : AppCompatActivity() {
         btnMesSiguiente = findViewById(R.id.btnMesSiguiente)
         btnVolver = findViewById(R.id.btnVolver)
 
-        // Llamamos a la función para agregar datos de ejemplo
-        agregarTransaccionesDeEjemplo()
+        agregarTransacciones()
 
-        // Configuramos el adaptador para el ListView
         val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, transacciones.map {
             "${it.tipoTransaccion}: ${it.etMonto} - ${it.spCategoria} - ${it.etFecha}"
         })
         lvTransacciones.adapter = adapter
 
-        // Actualizamos el título del mes
         actualizarMes()
 
-        // Manejadores de clic para los botones
         btnMesAnterior.setOnClickListener {
             cambiarMes(-1)
         }
@@ -52,25 +46,57 @@ class Historial : AppCompatActivity() {
         }
 
         btnVolver.setOnClickListener {
-            finish() // Vuelve a la actividad anterior
+            finish()
         }
     }
 
-    // Función para actualizar el mes en el título
+    private fun cambiarMes(incremento: Int) {
+        calendar.add(Calendar.MONTH, incremento)
+        actualizarMes()
+        agregarTransacciones()
+    }
+
     private fun actualizarMes() {
         val mesActual = dateFormat.format(calendar.time)
         tvTituloMes.text = "Mes: $mesActual"
     }
 
-    // Función para cambiar el mes (anterior o siguiente)
-    private fun cambiarMes(incremento: Int) {
-        calendar.add(Calendar.MONTH, incremento)
-        actualizarMes()
-    }
 
-    // Función para agregar transacciones de ejemplo
-    private fun agregarTransaccionesDeEjemplo() {
+
+    private fun agregarTransacciones() {
+        val dbHelper = DatabaseHelper(this)
+        val cursor = dbHelper.obtenerTransacciones()
+
         transacciones.clear()
+
+        val mesActual = calendar.get(Calendar.MONTH)
+        val anioActual = calendar.get(Calendar.YEAR)
+
+        while (cursor.moveToNext()) {
+            val tipo = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COL_TIPO))
+            val monto = cursor.getDouble(cursor.getColumnIndexOrThrow(DatabaseHelper.COL_MONTO))
+            val categoria = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COL_CATEGORIA))
+            val descripcion = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COL_DESCRIPCION))
+            val fecha = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COL_FECHA))
+
+            val formatoFecha = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+            val fechaTransaccion = formatoFecha.parse(fecha)
+            val calendarTransaccion = Calendar.getInstance()
+            calendarTransaccion.time = fechaTransaccion
+
+            val mesTransaccion = calendarTransaccion.get(Calendar.MONTH)
+            val anioTransaccion = calendarTransaccion.get(Calendar.YEAR)
+
+            if (mesTransaccion == mesActual && anioTransaccion == anioActual) {
+                transacciones.add(TransaccionModel(tipo, monto, categoria, descripcion, fecha))
+            }
+        }
+        cursor.close()
+
+        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, transacciones.map {
+            "${it.tipoTransaccion}: ${it.etMonto} - ${it.spCategoria} - ${it.etFecha}"
+        })
+        lvTransacciones.adapter = adapter
     }
 }
 

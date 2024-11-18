@@ -57,11 +57,30 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun actualizarValores() {
-        val totalIngresos = 0
-        val totalGastos = 0
-        val balanceActual = totalIngresos - totalGastos
+    override fun onResume() {
+        super.onResume()
+        actualizarValores()
+    }
 
+    private fun actualizarValores() {
+        val dbHelper = DatabaseHelper(this)
+        val cursor = dbHelper.obtenerTransacciones()
+
+        var totalIngresos = 0.0
+        var totalGastos = 0.0
+
+        while (cursor.moveToNext()) {
+            val tipo = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COL_TIPO))
+            val monto = cursor.getDouble(cursor.getColumnIndexOrThrow(DatabaseHelper.COL_MONTO))
+            if (tipo == "entrada") {
+                totalIngresos += monto
+            } else {
+                totalGastos += monto
+            }
+        }
+        cursor.close()
+
+        val balanceActual = totalIngresos - totalGastos
         tvTotalIngresos.text = "Total Ingresos: $${totalIngresos}"
         tvTotalGastos.text = "Total Gastos: $${totalGastos}"
         tvBalanceActual.text = "Balance Actual: $${balanceActual}"
