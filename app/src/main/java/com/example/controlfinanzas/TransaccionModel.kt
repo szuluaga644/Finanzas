@@ -1,7 +1,7 @@
 package com.example.controlfinanzas
 
 data class TransaccionModel(
-    val tipoTransaccion: String, // "entrada" o "gasto"
+    val tipoTransaccion: String,
     val etMonto: Double,
     val spCategoria: String,
     val etDescripcion: String,

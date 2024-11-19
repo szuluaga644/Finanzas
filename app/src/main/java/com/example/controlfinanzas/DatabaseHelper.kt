@@ -55,4 +55,12 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         val db = readableDatabase
         return db.query(TABLE_NAME, null, null, null, null, null, "$COL_FECHA DESC")
     }
+
+    fun eliminarTransaccion(tipo: String?, monto: Double?, categoria: String?, descripcion: String?, fecha: String?): Int {
+        val db = writableDatabase
+        val whereClause = "$COL_TIPO = ? AND $COL_MONTO = ? AND $COL_CATEGORIA = ? AND $COL_DESCRIPCION = ? AND $COL_FECHA = ?"
+        val whereArgs = arrayOf(tipo, monto.toString(), categoria, descripcion, fecha)
+        return db.delete(TABLE_NAME, whereClause, whereArgs)
+    }
+
 }

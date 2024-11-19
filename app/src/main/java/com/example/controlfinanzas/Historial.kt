@@ -1,5 +1,6 @@
 package com.example.controlfinanzas
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -48,6 +49,23 @@ class Historial : AppCompatActivity() {
         btnVolver.setOnClickListener {
             finish()
         }
+
+        lvTransacciones.setOnItemClickListener { _, _, position, _ ->
+            val transaccion = transacciones[position]
+            val intent = Intent(this, DetalleTransaccion::class.java)
+            intent.putExtra("TIPO_TRANSACCION", transaccion.tipoTransaccion)
+            intent.putExtra("MONTO", transaccion.etMonto)
+            intent.putExtra("CATEGORIA", transaccion.spCategoria)
+            intent.putExtra("DESCRIPCION", transaccion.etDescripcion)
+            intent.putExtra("FECHA", transaccion.etFecha)
+            startActivity(intent)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        agregarTransacciones()
     }
 
     private fun cambiarMes(incremento: Int) {
@@ -60,8 +78,6 @@ class Historial : AppCompatActivity() {
         val mesActual = dateFormat.format(calendar.time)
         tvTituloMes.text = "Mes: $mesActual"
     }
-
-
 
     private fun agregarTransacciones() {
         val dbHelper = DatabaseHelper(this)

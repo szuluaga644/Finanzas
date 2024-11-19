@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity() {
         val btnIngresarEntrada: Button = findViewById(R.id.btnIngresarEntrada)
         val btnIngresarGasto: Button = findViewById(R.id.btnIngresarGasto)
         val btnVerHistorial: Button = findViewById(R.id.btnVerHistorial)
+        val btnVerGraficos: Button = findViewById(R.id.btnVerGraficos)
         val btnSalir: Button = findViewById(R.id.btnSalir)
 
         actualizarValores()
@@ -51,6 +52,12 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, Historial::class.java)
             startActivity(intent)
         }
+
+        //btnVerGraficos.setOnClickListener {
+        //    val intent = Intent(this, Graficos::class.java)
+        //    startActivity(intent)
+        //}
+
 
         btnSalir.setOnClickListener {
             finish()

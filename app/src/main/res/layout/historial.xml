@@ -7,14 +7,29 @@
     android:padding="16dp"
     tools:context=".Historial">
 
-    <TextView
-        android:id="@+id/tvTituloHistorial"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Historial de Transacciones"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_gravity="center"/>
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnVolver"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:text="Volver" />
+
+        <TextView
+            android:id="@+id/tvTituloHistorial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Historial de Transacciones"
+            android:textSize="34sp"
+            android:textStyle="bold"
+            android:layout_marginLeft="30dp"/>
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/tvTituloMes"
@@ -28,34 +43,31 @@
     <ListView
         android:id="@+id/lvTransacciones"
         android:layout_width="match_parent"
-        android:layout_height="519dp"
+        android:layout_height="500dp"
         android:layout_marginBottom="16dp"
         android:divider="@android:color/darker_gray"
         android:dividerHeight="1dp" />
 
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal">
 
         <Button
             android:id="@+id/btnMesAnterior"
-            android:layout_width="189dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Mes Anterior" />
+            android:text="Mes Anterior"
+            android:layout_marginRight="30dp"/>
 
         <Button
             android:id="@+id/btnMesSiguiente"
-            android:layout_width="189dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Mes Siguiente" />
+            android:text="Mes Siguiente"
+            android:layout_marginLeft="30dp"/>
     </LinearLayout>
-
-    <Button
-        android:id="@+id/btnVolver"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Regresar"/>
 
 </LinearLayout>

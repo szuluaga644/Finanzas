@@ -14,7 +14,7 @@
         android:layout_gravity="center"
         android:layout_marginBottom="24dp"
         android:text="App Control de Finanzas"
-        android:textSize="24sp"
+        android:textSize="34sp"
         android:textStyle="bold" />
 
     <TextView
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:text="Balance Actual:"
-        android:textSize="34sp"
+        android:textSize="28sp"
         android:textStyle="bold" />
 
     <TextView
@@ -54,25 +54,38 @@
             android:id="@+id/btnIngresarEntrada"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Ingresar Entrada" />
+            android:text="Ingresar Entrada"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="20dp"/>
 
         <Button
             android:id="@+id/btnIngresarGasto"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Ingresar Gasto" />
+            android:text="Ingresar Gasto"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="20dp"/>
     </LinearLayout>
 
     <Button
         android:id="@+id/btnVerHistorial"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Historial" />
+        android:text="Historial"
+        android:layout_marginHorizontal="30dp"/>
+
+    <Button
+        android:id="@+id/btnVerGraficos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Graficos"
+        android:layout_marginHorizontal="30dp"/>
 
     <Button
         android:id="@+id/btnSalir"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Salir" />
+        android:text="Salir"
+        android:layout_marginHorizontal="30dp"/>
 
 </LinearLayout>

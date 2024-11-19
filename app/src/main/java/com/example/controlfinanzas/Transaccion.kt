@@ -55,7 +55,7 @@ class Transaccion : AppCompatActivity() {
     }
 
     private fun configurarCategorias() {
-        val categoriasEntrada = arrayOf("Salario", "Negocios", "Regalos", "Otros")
+        val categoriasEntrada = arrayOf("Nomina", "Negocios", "Regalos", "Otros")
         val categoriasSalida = arrayOf("Casa", "Comida", "Transporte", "Ropa", "Otros")
 
         val categorias = if (tipoTransaccion == "entrada") {

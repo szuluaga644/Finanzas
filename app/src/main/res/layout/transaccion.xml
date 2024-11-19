@@ -5,6 +5,18 @@
     android:orientation="vertical"
     android:padding="16dp">
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="24dp">
+
+    <Button
+        android:id="@+id/btnVolver"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Volver" />
+
     <TextView
         android:id="@+id/tvTituloTransaccion"
         android:layout_width="wrap_content"
@@ -13,7 +25,9 @@
         android:textSize="24sp"
         android:textStyle="bold"
         android:layout_gravity="center"
-        android:layout_marginBottom="24dp"/>
+        android:layout_marginLeft="30dp"/>
+
+    </LinearLayout>
 
     <EditText
         android:id="@+id/etMonto"
@@ -49,12 +63,7 @@
         android:id="@+id/btnGuardar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Guardar Transacción" />
-
-    <Button
-        android:id="@+id/btnVolver"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Salir" />
+        android:text="Guardar Transacción"
+        android:layout_marginTop="30dp"/>
 
 </LinearLayout>
