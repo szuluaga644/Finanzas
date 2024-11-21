@@ -12,21 +12,27 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ControlFinanzas"
         tools:targetApi="31">
-
         <activity
             android:name=".Splash"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" android:exported="true" />
-        <activity android:name=".Transaccion" android:exported="true" />
-        <activity android:name=".Historial" android:exported="true" />
-        <activity android:name=".DetalleTransaccion" android:exported="true"/>
-
-
+        <activity
+            android:name=".MainActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Transaccion"
+            android:exported="true" />
+        <activity
+            android:name=".Historial"
+            android:exported="true" />
+        <activity
+            android:name=".DetalleTransaccion"
+            android:exported="true" />
     </application>
 
 </manifest>
